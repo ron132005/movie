@@ -1,5 +1,5 @@
 body {
-    background-color: black;
+    background: url('https://static.cdn.turner.com/styles/header_image_1500x500_cropped/s3/2024-08/300759_ho-om_the_penguin_main_organic_27x40_rgb_v04_0.jpg?h=0edbf8b6&itok=DCCVC4BA') no-repeat center center fixed;
     color: #00ff00; /* Neon green color */
     font-family: 'Times New Roman', Times, serif; /* Set font to Times New Roman */
     text-align: center; /* Center all text */
