@@ -1,37 +1,41 @@
 body {
     background: url('https://static.cdn.turner.com/styles/header_image_1500x500_cropped/s3/2024-08/300759_ho-om_the_penguin_main_organic_27x40_rgb_v04_0.jpg?h=0edbf8b6&itok=DCCVC4BA') no-repeat center center fixed;
     background-size: cover;
-    color: #00ff00; /* Neon green color */
-    font-family: 'Times New Roman', Times, serif; /* Set font to Times New Roman */
-    text-align: center; /* Center all text */
     padding-top: 60px; /* Add padding to avoid overlapping content with header */
+    text-align: center;
+    color: #00ff00;
 }
 
 header {
     position: fixed;
     top: 0;
     width: 100%;
-    height: 50px; /* Make the header smaller */
+    height: 102px; /* Make the header smaller */
     background-color: rgba(0, 0, 0, 0.7); /* 70% opacity background */
     color: #00ff00; /* Neon green text */
     z-index: 1000; /* Ensure header is on top */
-    font-size: 2.3em; /* Reduce font size */
+    font-size: 2em; /* Reduce font size */
     display: flex;
     justify-content: center;
     align-items: center;
     font-family: 'Brush Script MT', cursive; /* Set header font to Brush Script MT */
 }
 
+footer {
+    text-align: center;
+}
+
 input[type="text"] {
-    padding: 10px;
+    padding: 15px;
     font-size: 1.2em;
-    border: 2px solid royalblue; /* Royal blue border */
+    border: 2px solid #ebff6e; /* Royal blue border */
     background-color: black;
     color: #00ff00;
     width: 300px; /* Fixed width for input box */
-    margin: 10px auto; /* Center input */
-    display: block; /* Block element for centering */
+    margin: 10px auto;
+    margin-top: 50px; /* Center input */
     border-radius: 8px; /* Rounded corners */
+    text-align: center;
 }
 
 .dropdown {
@@ -108,20 +112,34 @@ select {
     height: 100%;
 }
 
-footer {
-    margin: 20px auto; /* Center footer */
-    padding: 20px; /* Padding for content */
-    border: 2px solid royalblue; /* Royal blue border for footer */
-    background-color: black; /* Match background */
-    color: #00ff00; /* Neon green text color */
-    max-width: 800px; /* Maximum width for footer */
-    text-align: center; /* Center align text */
-    border-radius: 8px; /* Rounded corners */
-    font-family: 'Times New Roman', Times, serif; /* Set font to Times New Roman */
+.disclaimer {
+    font-size: 1.5em; /* Slightly smaller text for footer */
+    font-family: 'Times New Roman', Times, serif;
+    text-align: center;
+    color: #00ff00;
+    margin-top: 40px;
+    margin-left: 320px;
+    margin-right: 320px;
 }
 
 .footer-content {
-    font-size: 1.5em; /* Slightly smaller text for footer */
+    text-align: center;
+}
+
+.footer-content img {
+    margin-right: 10px;
+    width: 50px;
+    height: 50px;
+    background-color: #f7dc0f98;
+    border-radius: 10px;
+}
+
+.category {
+    margin-top: 70px;
+}
+
+.patch {
+    color: white;
 }
 
 /* Media Queries for Mobile */
@@ -152,10 +170,19 @@ footer {
         width: 100%; /* Full width video on mobile */
         height: 300px; /* Adjust height for mobile */
     }
-
-    footer {
-        font-size: 0.8em; /* Smaller font size */
-        max-width: 90%; /* Reduce footer width for mobile */
-        padding: 5px; /* Less padding on mobile */
+    .footer-content img {
+        margin-right: 5px;
+        width: 50px;
+        height: 50px;
+        border-radius: 10px;
     }
-}
+
+    .disclaimer {
+        font-size: 1.5em; /* Slightly smaller text for footer */
+        font-family: 'Times New Roman', Times, serif;
+        text-align: center;
+        color: #00ff00;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+  }

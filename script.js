@@ -11,27 +11,34 @@ const videoPlayer = document.getElementById('videoPlayer');
 
 // TMDB API Key
 const TMDB_API_KEY = 'a5f1a167ac8db6e31a8fb9934919703c';
+const OMDB_API_KEY = '49064e2e'
 
 // Variable to store selected show's ID and TMDB ID
 let selectedShowId;
 let selectedTmdbId;
 
-// Function to fetch shows from TVmaze API
-async function fetchShows(query) {
-    const response = await fetch(`https://api.tvmaze.com/search/shows?q=${query}`);
-    const data = await response.json();
-    return data.map(item => ({
-        id: item.show.id,
-        name: item.show.name,
-        image: item.show.image ? item.show.image.medium : 'https://via.placeholder.com/210x315?text=No+Image', // Fallback image
-        imdbId: item.show.externals.imdb, // Store IMDB ID
-        genre: item.show.genres.join(", "),
-        description: item.show.summary ? item.show.summary.replace(/(<([^>]+)>)/gi, "") : "No description available."
-    }));
+//Function to show search box
+function showSearchBox() {
+    const selectedCat = document.getElementById("selection").value;
+    if (selectedCat != 0) {
+        searchBox.style.display = "block";
+        dropdown.style.display = 'none';
+        dropdown.style.display = 'none';
+        seasonContainer.style.display = 'none';
+        episodeContainer.style.display = 'none';
+        videoContainer.style.display = 'none';
+    } else {
+        searchBox.style.display = "none";
+        dropdown.style.display = 'none';
+        dropdown.style.display = 'none';
+        seasonContainer.style.display = 'none';
+        episodeContainer.style.display = 'none';
+        videoContainer.style.display = 'none'; // Hide video container initially
+        searchBox.style.display = "none";
+    }
 }
-
 // Function to snow
-const NUMBER_OF_SNOWFLAKES = 10;
+const NUMBER_OF_SNOWFLAKES = 5;
 const MAX_SNOWFLAKE_SIZE = 5;
 const MAX_SNOWFLAKE_SPEED = 2;
 const SNOWFLAKE_COLOUR = '#ddd';
@@ -106,6 +113,97 @@ window.addEventListener('resize', () => {
 // Start animation
 animate();
 
+// Function to fetch movies from TVmaze API
+async function fetchMovies(query) {
+    const response = await fetch(`https://www.omdbapi.com/?s=${query}&type=movie&apiKey=${OMDB_API_KEY}`);
+    const data = await response.json();
+    return data.Search.map(item => ({
+        id: item.imdbID,
+        name: item.Title,
+        image: item.Poster,
+        imdbId: item.imdbID, // Store IMDB ID
+    }));
+}
+
+//Display drop down results for movies
+function displayMovieDropdownResults(results) {
+    dropdown.innerHTML = '';  // Clear previous results
+    if (results.length === 0) {
+        dropdown.style.display = 'none';
+        return;
+    }
+
+    results.forEach(movie => {
+        const item = document.createElement('div');
+        item.classList.add('dropdown-item');
+        
+        const img = document.createElement('img');
+        img.src = movie.image;
+        img.alt = movie.name;
+        const text = document.createElement('span');
+        text.textContent = movie.name;
+
+        item.appendChild(img);
+        item.appendChild(text);
+        dropdown.appendChild(item);
+
+        // On click, display detailed info in resultsContainer and fetch seasons
+        item.addEventListener('click', async () => {
+            displayMovieFullResults([movie]);  // Display the selected movie 
+            // Store selected movie's IMDb ID
+            // Close the dropdown after selecting a movie
+            dropdown.style.display = 'none';  // Hide dropdown
+        });
+    });
+
+    dropdown.style.display = 'block';  // Show the dropdown
+}
+
+//Function to display full movie results
+function displayMovieFullResults(results) {
+    resultsContainer.innerHTML = '';  // Clear previous results
+
+    results.forEach(movie => {
+        const card = document.createElement('div');
+        card.classList.add('show-card');
+
+        const img = document.createElement('img');
+        img.src = movie.image;
+        img.alt = movie.name;
+        const text = document.createElement('div');
+        text.classList.add('show-title');
+        text.textContent = movie.name;
+
+        card.appendChild(img);
+        card.appendChild(text);
+
+        resultsContainer.appendChild(card);
+        selectedMovieId = movie.imdbId;
+        
+        const embedUrl = `https://vidlink.pro/movie/${selectedMovieId}`;
+        
+        // Display the embed link in the iframe
+        videoPlayer.src = embedUrl;
+        dropdown.style.display = 'none';
+        seasonContainer.style.display = 'none';
+        episodeContainer.style.display = 'none';
+        videoContainer.style.display = 'block';  // Show the video container
+    });
+}
+
+// Function to fetch shows from TVmaze API
+async function fetchShows(query) {
+    const response = await fetch(`https://api.tvmaze.com/search/shows?q=${query}`);
+    const data = await response.json();
+    return data.map(item => ({
+        id: item.show.id,
+        name: item.show.name,
+        image: item.show.image ? item.show.image.medium : 'https://via.placeholder.com/210x315?text=No+Image', // Fallback image
+        imdbId: item.show.externals.imdb, // Store IMDB ID
+        genre: item.show.genres.join(", "),
+        description: item.show.summary ? item.show.summary.replace(/(<([^>]+)>)/gi, "") : "No description available."
+    }));
+}
 
 // Function to fetch seasons from TVmaze API
 async function fetchSeasons(showId) {
@@ -243,10 +341,14 @@ episodeDropdown.addEventListener('change', () => {
 // Function to handle search input
 searchBox.addEventListener('input', async () => {
     const searchTerm = searchBox.value.trim();
+    const selectedCat = document.getElementById("selection").value;
 
-    if (searchTerm.length > 0) {
+    if (selectedCat == "series" && searchTerm.length > 0) {
         const fetchedShows = await fetchShows(searchTerm);
         displayDropdownResults(fetchedShows);
+    } else if (selectedCat == "movies" && searchTerm.length > 0){
+        const fetchedMovies = await fetchMovies(searchTerm);
+        displayMovieDropdownResults(fetchedMovies);
     } else {
         dropdown.style.display = 'none'; // Hide dropdown if input is empty
     }
@@ -279,3 +381,4 @@ dropdown.style.display = 'none';
 seasonContainer.style.display = 'none';
 episodeContainer.style.display = 'none';
 videoContainer.style.display = 'none'; // Hide video container initially
+searchBox.style.display = "none";

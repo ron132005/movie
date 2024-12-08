@@ -4,23 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>getRONed</title>
-
-    <script type="text/javascript" data-cfasync="false">
-/*<![CDATA[/* */
-(function(){var n=window,v="d49376079284a1963825bcc6200d5f35",t=[["siteId",87*979-951+5071545],["minBid",0],["popundersPerIP","0"],["delayBetween",0],["default",false],["defaultPerDay",0],["topmostLayer","auto"]],c=["d3d3LnZpc2FyaW9tZWRpYS5jb20vcGNvZGVmbGFzay5taW4uY3Nz","ZDEzazdwcmF4MXlpMDQuY2xvdWRmcm9udC5uZXQvc0h6SFAvZGpxdWVyeS5mbHVpZGJveC5taW4uanM="],h=-1,s,b,a=function(){clearTimeout(b);h++;if(c[h]&&!(1759170234000<(new Date).getTime()&&1<h)){s=n.document.createElement("script");s.type="text/javascript";s.async=!0;var u=n.document.getElementsByTagName("script")[0];s.src="https://"+atob(c[h]);s.crossOrigin="anonymous";s.onerror=a;s.onload=function(){clearTimeout(b);n[v.slice(0,16)+v.slice(0,16)]||a()};b=setTimeout(a,5E3);u.parentNode.insertBefore(s,u)}};if(!n[v]){try{Object.freeze(n[v]=t)}catch(e){}a()}})();
-/*]]>/* */
-</script>
-
+    <title>getRONed - Stream Movies and Series</title>
 </head>
 <body>
     <header>
         <h1>getRONed</h1>
     </header>
     <div>
-        <input type="text" id="searchBox" placeholder="Search for TV shows">
+        <select class="category" id="selection" onchange="showSearchBox()">
+            <option value="0">Select Type</option>
+            <option value="movies">Movies</option>
+            <option value="series">Series</option>
+        </select>
+    </div>
+    <div>
+        <input type="text" class="search-box" id="searchBox" placeholder="Search for TV shows">
         <div id="dropdown" class="dropdown"></div>
     </div>
+
     <div id="resultsContainer"></div>
 
     <!-- New dropdowns for season and episode -->
@@ -40,10 +41,16 @@
         <iframe id="videoPlayer" src="" frameborder="0" allowfullscreen></iframe>
     </div>
 
-    <!-- Footer with disclaimer -->
+    <div class="disclaimer">
+        <p><i>DISCLAIMER! This website does not host any files on its server. All content displayed on this site is provided by third-party sites and services. I, Ron Funiestas, do NOT control or endorse any content, products, or services provided by these sites. Any reliance on the content or services provided by third-party sites is done at your own risk. I recommend that you read the terms and conditions and privacy policies of any third-party site that you visit. If you have any questions or concerns about the content hosted by third-party sites, please contact the site owner or administrator directly!</i></p>
+    </div>
+
+    <p class="patch">v2.0.3</p>
+
     <footer>
         <div class="footer-content">
-            <p><i>DISCLAIMER! This website does not host any files on its server. All content displayed on this site is provided by third-party sites and services. I, Ron Funiestas, do NOT control or endorse any content, products, or services provided by these sites. Any reliance on the content or services provided by third-party sites is done at your own risk. I recommend that you read the terms and conditions and privacy policies of any third-party site that you visit. If you have any questions or concerns about the content hosted by third-party sites, please contact the site owner or administrator directly!</i></p>
+            <a href="https://web.facebook.com/profile.php?id=100054572653414"><img src="images/logos/fb.png" alt="Facebook Link"></a>
+            <a href="mailto:funiestasronmar14@gmail.com"><img src="images/logos/em.png" alt="Email Link" </a>
         </div>
     </footer>
 
