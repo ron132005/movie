@@ -17,6 +17,34 @@ const OMDB_API_KEY = '49064e2e'
 let selectedShowId;
 let selectedTmdbId;
 
+//Function to disable ads from vidlink
+function disableAdScripts(iframe) {
+    iframe.addEventListener("load", () => {
+      try {
+        // Ensure we can access the iframe's content
+        const iframeDoc = document.getElementById('videoPlayer');
+  
+        // Find and remove the ad script by ID
+        const adScript = iframeDoc.getElementById("ad-script");
+        if (adScript) {
+          adScript.remove(); // Remove the ad script
+          console.log("Ad script removed from iframe.");
+        } else {
+          console.log("Ad script not found.");
+        }
+      } catch (error) {
+        console.error("Error accessing iframe content:", error);
+      }
+    });
+  }
+  
+  // Disable ad scripts within the iframe
+  if (videoPlayer) {
+    disableAdScripts(videoPlayer);
+  } else {
+    console.error("Iframe not found.");
+  }
+  
 //Function to show search box
 function showSearchBox() {
     const selectedCat = document.getElementById("selection").value;
