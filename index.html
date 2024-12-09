@@ -4,12 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/jpg" href="images/logos/logo.jpg">
     <title>getRONed - Stream Movies and Series</title>
 </head>
 <body>
     <header>
+        <img src="images/logos/logo.jpg" alt="Logo">
         <h1>getRONed</h1>
     </header>
+        <h1 id="intro">Stream Movies <br>and TV Shows </br></h1>
     <div>
         <select class="category" id="selection" onchange="showSearchBox()">
             <option value="0">Select Type</option>
@@ -18,7 +21,7 @@
         </select>
     </div>
     <div>
-        <input type="text" class="search-box" id="searchBox" placeholder="Search for TV shows">
+        <input type="text" class="search-box" id="searchBox" placeholder="Enter Keywords">
         <div id="dropdown" class="dropdown"></div>
     </div>
 
@@ -39,6 +42,29 @@
     <!-- Video container for embedding -->
     <div id="videoContainer">
         <iframe id="videoPlayer" src="" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <div class="box-out">
+        <h1 class="faqs title">FREQUENTLY ASKED QUESTIONS</h1>
+        <div class="box-in">
+            <h1 class="box-title">Are your links protected from DMCA?</h1>
+            <p class="box-define">The links are secure and protected, ensuring that they are not subject to removal due to DMCA notices.</p>
+        </div>
+        <div class="box-in">
+            <h1 class="box-title">Are subtitles available for all movies and TV shows?</h1>
+            <p class="box-define">We source subtitles from various websites, ensuring we have a wide selection available for almost every title.</p>
+        </div>
+        <div class="box-in">
+            <h1 class="box-title">Do you offer movies and TV Shows in languages other than English?</h1>
+            <p class="box-define">While the server primarily caters to English-speaking audiences, I do host a vast collection of global movies in their original language. However, most of the videos have subtitles included.</p>
+        </div>
+        <div class="box-in">
+            <h1 class="box-title">What should I do if I come across incorrect movies or TV shows?</h1>
+            <p class="box-define">If you notice any inaccuracies with a movie or TV show, please utilize the report button on the player. I will promptly address and rectify the issue.</p>
+        </div>
+        <div class="box-in">
+            <h1 class="box-title">Can we watch Anime?</h1>
+            <p class="box-define">Currently, Anime is not supported, may do that in the future.</p>
+        </div>
     </div>
 
     <div class="disclaimer">

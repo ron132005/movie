@@ -1,24 +1,32 @@
-body {
-    background: url('https://static.cdn.turner.com/styles/header_image_1500x500_cropped/s3/2024-08/300759_ho-om_the_penguin_main_organic_27x40_rgb_v04_0.jpg?h=0edbf8b6&itok=DCCVC4BA') no-repeat center center fixed;
+html, body {
+    background: radial-gradient(circle, #152c42, #0c1824);
     background-size: cover;
-    padding-top: 60px; /* Add padding to avoid overlapping content with header */
     text-align: center;
     color: #00ff00;
+    margin: 0;
+    padding: 0;
 }
 
 header {
     position: fixed;
-    top: 0;
-    width: 100%;
-    height: 102px; /* Make the header smaller */
-    background-color: rgba(0, 0, 0, 0.7); /* 70% opacity background */
-    color: #00ff00; /* Neon green text */
-    z-index: 1000; /* Ensure header is on top */
-    font-size: 2em; /* Reduce font size */
+    height: 5rem; /* Make the header smaller */
+    background-color: rgba(15, 31, 47, 0.5); /* 70% opacity background */
+    border-bottom: 1px solid #152c42;
+    color: #ffffff; /* Neon green text */
+    font-size: 1em; /* Reduce font size */
     display: flex;
-    justify-content: center;
+    width: 100%;
     align-items: center;
-    font-family: 'Brush Script MT', cursive; /* Set header font to Brush Script MT */
+    backdrop-filter: blur(8px);
+    top: 0;
+}
+
+header img {
+    height: 50%;
+    border-radius: 20px;
+    margin-left: 20px;
+    margin-right: 5px;
+    display: flex;
 }
 
 footer {
@@ -33,7 +41,6 @@ input[type="text"] {
     color: #00ff00;
     width: 300px; /* Fixed width for input box */
     margin: 10px auto;
-    margin-top: 50px; /* Center input */
     border-radius: 8px; /* Rounded corners */
     text-align: center;
 }
@@ -135,18 +142,72 @@ select {
 }
 
 .category {
-    margin-top: 70px;
+    margin-top: 10px;
 }
 
 .patch {
     color: white;
 }
 
+#intro {
+    font-family: Inter, sans-serif;
+    font-size: 50px;
+    line-height: 4.3rem;
+    color: white;
+    font-weight: 500;
+    padding-top: 100px;
+}
+
+.title {
+    font-family: Inter, sans-serif;
+    font-size: 50px;
+    line-height: 4.3rem;
+    color: rgb(183, 125, 16);
+    font-weight: 500;
+}
+
+.box-title {
+    padding-left: 20px;
+    padding-right: 20px;
+    font-family: Inter, sans-serif;
+    color: #ffffff;
+    font-size: 30px;
+    font-weight: 300;
+}
+
+.box-define {
+    padding-left: 22px;
+    padding-right: 22px;
+    font-family: Inter, sans-serif;
+    color: #ffffff8e;
+    font-size: 27px;
+    font-weight: 100;
+}
+
+.box-in {
+    border: 1px solid #183b5c;
+    background: #162f45;
+    border-radius: 10px;
+    margin: 12px;
+    text-align: left;
+    max-width: 47%;
+}
+
+.box-out {
+    flex-wrap: wrap;
+    background: #091724;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    box-sizing: border-box;
+}
+
 /* Media Queries for Mobile */
 @media screen and (max-width: 768px) {
     header {
         height: 40px; /* Smaller header for mobile */
-        font-size: 1.6em; /* Reduce font size */
+        font-size: 1em; /* Reduce font size */
+        line-height: 2.5em;
     }
 
     input[type="text"] {
@@ -184,5 +245,24 @@ select {
         color: #00ff00;
         margin-left: 20px;
         margin-right: 20px;
+    }
+
+    .title {
+        font-size: 30px;
+        font-weight: 300;
+        line-height: 2.5rem;
+    }
+
+    .box-in {
+        margin: 10px;
+        max-width: fit-content;
+    }
+
+    .box-title {
+            font-size: 25px;
+    }
+        
+    .box-define {
+            font-size: 22px;
     }
   }
