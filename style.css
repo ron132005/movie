@@ -1,3 +1,5 @@
+@import url('https://fonts.cdnfonts.com/css/thegoodmonolith');
+
 html, body {
     background: radial-gradient(circle, #152c42, #0c1824);
     background-size: cover;
@@ -33,16 +35,27 @@ footer {
     text-align: center;
 }
 
-input[type="text"] {
-    padding: 15px;
-    font-size: 1.2em;
-    border: 2px solid #ebff6e; /* Royal blue border */
-    background-color: black;
-    color: #00ff00;
-    width: 300px; /* Fixed width for input box */
+#search-container {
+    display: flex;
+    width: 300px;
     margin: 10px auto;
-    border-radius: 8px; /* Rounded corners */
-    text-align: center;
+    align-items: center;
+    background: #0f2a4d;
+    border-radius: 10px;
+}
+
+#search-container img {
+    height: 20px;
+    vertical-align: middle;
+}
+
+.search-box {
+    padding: 10px;
+    font-size: 1em;
+    color: #00ff00; /* Neon green text */
+    width: auto; /* Adjust width based on content */
+    margin: 10px auto; /* Center dropdown */
+    background: #0f2a4d
 }
 
 .dropdown {
@@ -101,7 +114,7 @@ select {
     border: 2px solid royalblue; /* Royal blue border */
     background-color: black;
     color: #00ff00; /* Neon green text */
-    width: auto; /* Adjust width based on content */
+    width: 300px; /* Adjust width based on content */
     margin: 10px auto; /* Center dropdown */
     border-radius: 8px; /* Rounded corners */
 }
@@ -120,13 +133,20 @@ select {
 }
 
 .disclaimer {
+    background: #0f2a4d;
+    border: #183b5c;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 75%;
+    margin: 20px auto;
+    padding: 10px;
+}
+
+.disclaimer p {
     font-size: 1.5em; /* Slightly smaller text for footer */
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'TheGoodMonolith', san-serif;
     text-align: center;
     color: #00ff00;
-    margin-top: 40px;
-    margin-left: 320px;
-    margin-right: 320px;
 }
 
 .footer-content {
@@ -141,10 +161,6 @@ select {
     border-radius: 10px;
 }
 
-.category {
-    margin-top: 10px;
-}
-
 .patch {
     color: white;
 }
@@ -155,7 +171,7 @@ select {
     line-height: 4.3rem;
     color: white;
     font-weight: 500;
-    padding-top: 100px;
+    padding-top: 55px;
 }
 
 .title {
@@ -200,17 +216,18 @@ select {
     justify-content: center;
     align-items: flex-start;
     box-sizing: border-box;
+    margin-top: 30px;
 }
 
 /* Media Queries for Mobile */
 @media screen and (max-width: 768px) {
     header {
-        height: 40px; /* Smaller header for mobile */
+        height: 60px; /* Smaller header for mobile */
         font-size: 1em; /* Reduce font size */
         line-height: 2.5em;
     }
 
-    input[type="text"] {
+    #search-container {
         width: 90%; /* Full width for input on mobile */
         font-size: 1em; /* Slightly smaller font size */
     }
@@ -239,12 +256,8 @@ select {
     }
 
     .disclaimer {
-        font-size: 1.5em; /* Slightly smaller text for footer */
-        font-family: 'Times New Roman', Times, serif;
-        text-align: center;
+        font-size: 0.8em; /* Slightly smaller text for footer */
         color: #00ff00;
-        margin-left: 20px;
-        margin-right: 20px;
     }
 
     .title {

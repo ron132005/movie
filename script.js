@@ -1,5 +1,6 @@
 // Search functionality
-const searchBox = document.getElementById('searchBox');
+const searchBox = document.getElementById('search-container');
+const input = document.getElementById('searchBox')
 const dropdown = document.getElementById('dropdown');
 const resultsContainer = document.getElementById('resultsContainer');
 const seasonContainer = document.getElementById('seasonContainer');
@@ -367,8 +368,8 @@ episodeDropdown.addEventListener('change', () => {
 });
 
 // Function to handle search input
-searchBox.addEventListener('input', async () => {
-    const searchTerm = searchBox.value.trim();
+input.addEventListener('input', async () => {
+    const searchTerm = input.value.trim();
     const selectedCat = document.getElementById("selection").value;
 
     if (selectedCat == "series" && searchTerm.length > 0) {
