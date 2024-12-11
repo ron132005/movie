@@ -42,65 +42,6 @@ let selectedTmdbId;
             updateCounter();
         });
     });
-
-// Create a function to block specific requests
-// Function to block new tab openings for specific domains (like facebook, tiktok)
-// Function to block new tab openings for specific domains and keywords
-function blockAdLinks() {
-    const blockedKeywords = [
-        "facebook",
-        "tiktok",
-        "shopee",
-        "shpe",
-        "prmo",  // Possibly "promo"
-        "coupom", // Possibly "coupon"
-        "win",
-        "phone",
-        "lite",
-        "ad",
-        "add",
-        // Add more keywords here (total of 100+ or as needed)
-        "sale", "discount", "deal", "free", "offer", "limited", "now", "shopping", "exclusive", 
-        "giveaway", "click", "win", "prize", "cashback", "reward", "game", "contest", "buy", 
-        "fast", "special", "best", "hot", "deal", "bargain", "gift", "voucher", "shop", "offer", 
-        "coupon", "crypto", "forex", "investment", "affiliate", "bet", "wager", "casino", 
-        "event", "new", "bestprice", "voucher", "discounts", "bestseller", "today", "fashion", 
-        "health", "beauty", "electronics", "gadgets", "shipping", "store", "app", "support", "cash", 
-        "newsletter", "press", "newlaunch", "premium", "features", "reviews", "unlimited", "offers", 
-        "shopnow", "backinstock", "hurry", "promo", "exclusiveoffer", "unbeatable", "trending", "newarrivals", 
-        "fastdelivery", "holiday", "voucher", "freegift", "buy1get1", "online", "members", "rewards", 
-        "preorder", "onlineshopping", "webinar", "dropshipping", "tricks", "help", "marketplace", "business", 
-        "getstarted", "clickhere", "getnow", "onlytoday", "instock", "watch", "salealert", "exclusiveoffer", 
-        "limitedtime", "bestdeal", "freeaccess", "discountcode", "blackfriday", "cybermonday", "tuesday", 
-        "flashsale", "shopnow", "buyitnow", "specialoffer", "buytoday", "dealofday", "clearance", "limitedoffer", "trip"
-    ];
-
-    // Intercept clicks on anchor tags
-    document.addEventListener('click', function (event) {
-        const target = event.target;
-        
-        // Check if the clicked element is an anchor tag and if its URL matches the blocked keywords
-        if (target.tagName === 'A' && blockedKeywords.some(keyword => target.href.toLowerCase().includes(keyword))) {
-            console.log(`Blocked opening link: ${target.href}`);
-            event.preventDefault();  // Prevent the link from opening
-        }
-    });
-
-    // Intercept window.open directly if it's used elsewhere (e.g., inside scripts)
-    const originalOpen = window.open;
-    window.open = function (url, ...args) {
-        if (blockedKeywords.some(keyword => url.toLowerCase().includes(keyword))) {
-            console.log(`Blocked opening new tab: ${url}`);
-            return null;  // Prevent the window from opening
-        }
-        return originalOpen.apply(this, [url, ...args]);
-    };
-}
-
-// Run the block function
-blockAdLinks();
-
-
   
 //Function to show search box
 function showSearchBox() {
@@ -265,7 +206,7 @@ function displayMovieFullResults(results) {
         resultsContainer.appendChild(card);
         selectedMovieId = movie.imdbId;
         
-        const embedUrl = `https://vidjoy.pro/movie/${selectedMovieId}`;
+        const embedUrl = `https://vidjoy.pro/embed/movie/${selectedMovieId}`;
         
         // Display the embed link in the iframe
         videoPlayer.src = embedUrl;
@@ -415,7 +356,7 @@ episodeDropdown.addEventListener('change', () => {
         const seasonNumber = seasonDropdown.options[seasonDropdown.selectedIndex].text.split(' ')[1]; // Get season number
 
         // Construct the embed URL
-        const embedUrl = `https://vidjoy.pro/tv/${selectedTmdbId}/${seasonNumber}/${episodeNumber}`;
+        const embedUrl = `https://vidjoy.pro/embed/tv/${selectedTmdbId}/${seasonNumber}/${episodeNumber}`;
         
         // Display the embed link in the iframe
         videoPlayer.src = embedUrl;
