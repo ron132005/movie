@@ -4,7 +4,7 @@ html, body {
     background: radial-gradient(circle, #152c42, #0c1824);
     background-size: cover;
     text-align: center;
-    color: #00ff00;
+    color: #ffffff;
     margin: 0;
     padding: 0;
 }
@@ -166,7 +166,7 @@ select {
 }
 
 #intro {
-    font-family: Inter, sans-serif;
+    font-family: 'TheGoodMonolith', san-serif;
     font-size: 50px;
     line-height: 4.3rem;
     color: white;
@@ -207,6 +207,11 @@ select {
     margin: 12px;
     text-align: left;
     max-width: 47%;
+    transition: all 0.3s ease;
+}
+
+.box-in:hover {
+    background: #0b2135;
 }
 
 .box-out {
@@ -217,6 +222,36 @@ select {
     align-items: flex-start;
     box-sizing: border-box;
     margin-top: 30px;
+}
+
+.stats-container {
+    justify-content: center;
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.stat {
+    background-color: #22222234;
+    border-radius: 15px;
+    padding: 20px 40px;
+    text-align: center;
+    box-shadow: 0 4px 10px;
+}
+
+.number-container {
+    display: inline-flex; /* Ensure the number and "K+" are on the same line */
+    align-items: baseline; /* Align "K+" to the bottom of the number */
+    font-size: 48px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.number {
+    font-size: 48px;
+    font-weight: bold;
+    display: block;
+    color: #fff;
 }
 
 /* Media Queries for Mobile */
@@ -277,5 +312,18 @@ select {
         
     .box-define {
             font-size: 22px;
+    }
+    
+    .stat {
+        padding: 10px 20px;
+        box-shadow: 0 2px 5px;
+    }
+    
+    .number-container {
+        font-size: 48px;
+    }
+    
+    .number {
+        font-size: 48px;
     }
   }

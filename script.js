@@ -18,6 +18,31 @@ const OMDB_API_KEY = '49064e2e'
 let selectedShowId;
 let selectedTmdbId;
 
+//Event listener when page is loaded
+    document.addEventListener("DOMContentLoaded", () => {
+        const counters = document.querySelectorAll('.number');
+        const animationDuration = 2000; // Total animation time in ms
+        const frameRate = 11;
+
+        counters.forEach(counter => {
+            const target = +counter.getAttribute('data-target');
+            const increment = target / (animationDuration / (1000 / frameRate)); // Increment per frame (assuming ~60fps)
+
+            const updateCounter = () => {
+                const current = +counter.innerText;
+
+                if (current < target) {
+                    counter.innerText = Math.ceil(current + increment);
+                    setTimeout(updateCounter, 1000 / frameRate); // Call for the next frame
+                } else {
+                    counter.innerText = target; // Ensure the final value matches the target
+                }
+            };
+
+            updateCounter();
+        });
+    });
+
 //Function to disable ads from vidlink
 function disableAdScripts(iframe) {
     iframe.addEventListener("load", () => {
