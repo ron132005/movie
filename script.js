@@ -12,7 +12,7 @@ const videoPlayer = document.getElementById('videoPlayer');
 
 // TMDB API Key
 const TMDB_API_KEY = 'a5f1a167ac8db6e31a8fb9934919703c';
-const OMDB_API_KEY = '647643b3'
+const OMDB_API_KEY = '49064e2e'
 
 // Variable to store selected show's ID and TMDB ID
 let selectedShowId;
