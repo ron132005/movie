@@ -12,7 +12,6 @@ const videoPlayer = document.getElementById('videoPlayer');
 
 // TMDB API Key
 const TMDB_API_KEY = 'a5f1a167ac8db6e31a8fb9934919703c';
-const OMDB_API_KEY = '3c799ade'
 
 // Variable to store selected show's ID and TMDB ID
 let selectedShowId;
@@ -141,14 +140,22 @@ animate();
 
 // Function to fetch movies from TVmaze API
 async function fetchMovies(query) {
-    const response = await fetch(`https://www.omdbapi.com/?s=${query}&type=movie&apiKey=${OMDB_API_KEY}`);
+    const response = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${TMDB_API_KEY}&query=${query}`);
     const data = await response.json();
-    return data.Search.map(item => ({
-        id: item.imdbID,
-        name: item.Title,
-        image: item.Poster,
-        imdbId: item.imdbID, // Store IMDB ID
+
+    // Map over the results to include required fields
+    const results = await Promise.all(data.results.map(async (item) => {
+        // Fetch movie details to get the IMDb ID
+        const detailsResponse = await fetch(`https://api.themoviedb.org/3/movie/${item.id}?api_key=${TMDB_API_KEY}`);
+        const details = await detailsResponse.json();
+
+        return {
+            imdbId: details.imdb_id,
+            name: item.title,
+            image: `http://image.tmdb.org/t/p/w500${item.poster_path}`,
+        };
     }));
+    return results;
 }
 
 //Display drop down results for movies
