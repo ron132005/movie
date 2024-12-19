@@ -1,4 +1,4 @@
-// Search functionality
+// ASSIGNATION
 const searchBox = document.getElementById("search-container");
 const input = document.getElementById("searchBox");
 const dropdown = document.getElementById("dropdown");
@@ -12,60 +12,27 @@ const videoPlayer = document.getElementById("videoPlayer");
 const sentence = document.getElementById("sentence");
 const announcement = document.getElementById("ann");
 
-// TMDB API Key
+// VARIABLES
 const TMDB_API_KEY = "a5f1a167ac8db6e31a8fb9934919703c";
-
-// Variable to store selected show's ID and TMDB ID
 let selectedShowId;
 let selectedTmdbId;
-
-//Event listener when page is loaded
-document.addEventListener("DOMContentLoaded", () => {
-  const counters = document.querySelectorAll(".number");
-  const animationDuration = 2000; // Total animation time in ms
-  const frameRate = 11;
-
-  counters.forEach((counter) => {
-    const target = +counter.getAttribute("data-target");
-    const increment = target / (animationDuration / (1000 / frameRate)); // Increment per frame (assuming ~60fps)
-
-    const updateCounter = () => {
-      const current = +counter.innerText;
-
-      if (current < target) {
-        counter.innerText = Math.ceil(current + increment);
-        setTimeout(updateCounter, 1000 / frameRate); // Call for the next frame
-      } else {
-        counter.innerText = target; // Ensure the final value matches the target
-      }
-    };
-
-    updateCounter();
-  });
-});
 
 async function extractAndAddToClassList() {
   const proxyUrl = "https://api.allorigins.win/get?url=";
   const targetUrl = "https://ann-getroned.onrender.com";
-
   const response = await fetch(proxyUrl + encodeURIComponent(targetUrl));
   const htmlText = (await response.json()).contents;
-
   const lines = (htmlText.match(/\[ann\]([\s\S]*?)\[ann\]/)?.[1] || "")
-    .split("<br>")
+    .split("|")
     .map((line) => line.trim())
     .filter(Boolean);
-
   lines.forEach((line) => {
     const p = document.createElement("p");
     p.textContent = line;
     sentence.appendChild(p);
   });
-
   announcement.style.display = "block";
 }
-
-extractAndAddToClassList();
 
 //Function to show search box
 function showSearchBox() {
@@ -83,89 +50,10 @@ function showSearchBox() {
     dropdown.style.display = "none";
     seasonContainer.style.display = "none";
     episodeContainer.style.display = "none";
-    videoContainer.style.display = "none"; // Hide video container initially
+    videoContainer.style.display = "none";
     searchBox.style.display = "none";
   }
 }
-// Function to snow
-const NUMBER_OF_SNOWFLAKES = 5;
-const MAX_SNOWFLAKE_SIZE = 5;
-const MAX_SNOWFLAKE_SPEED = 2;
-const SNOWFLAKE_COLOUR = "#ddd";
-const snowflakes = [];
-
-// Create canvas and append to body
-const canvas = document.createElement("canvas");
-canvas.style.position = "fixed"; // Ensure it stays in place
-canvas.style.pointerEvents = "none"; // Avoid interfering with clicks
-canvas.style.top = "0";
-canvas.style.left = "0"; // Align to the left
-canvas.width = window.innerWidth; // Match full width
-canvas.height = window.innerHeight; // Match full height
-document.body.appendChild(canvas);
-
-const ctx = canvas.getContext("2d");
-
-// Function to create a snowflake
-const createSnowflake = () => ({
-  x: Math.random() * canvas.width, // Random x position within the canvas width
-  y: Math.random() * canvas.height, // Random y position
-  radius: Math.floor(Math.random() * MAX_SNOWFLAKE_SIZE) + 1, // Random size
-  color: SNOWFLAKE_COLOUR,
-  speed: Math.random() * MAX_SNOWFLAKE_SPEED + 1, // Random fall speed
-  sway: Math.random() - 0.5, // Side-to-side sway
-});
-
-// Function to draw a snowflake
-const drawSnowflake = (snowflake) => {
-  ctx.beginPath();
-  ctx.arc(snowflake.x, snowflake.y, snowflake.radius, 0, Math.PI * 2);
-  ctx.fillStyle = snowflake.color;
-  ctx.fill();
-  ctx.closePath();
-};
-
-// Update snowflake position
-const updateSnowflake = (snowflake) => {
-  snowflake.y += snowflake.speed; // Move down
-  snowflake.x += snowflake.sway; // Sway side-to-side
-  if (
-    snowflake.y > canvas.height ||
-    snowflake.x < 0 ||
-    snowflake.x > canvas.width
-  ) {
-    Object.assign(snowflake, createSnowflake()); // Recycle snowflake
-    snowflake.y = 0; // Start at the top
-  }
-};
-
-// Animation function
-const animate = () => {
-  ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas
-  snowflakes.forEach((snowflake) => {
-    updateSnowflake(snowflake);
-    drawSnowflake(snowflake);
-  });
-  requestAnimationFrame(animate); // Recursive animation call
-};
-
-// Initialize snowflakes
-for (let i = 0; i < NUMBER_OF_SNOWFLAKES; i++) {
-  snowflakes.push(createSnowflake());
-}
-
-// Adjust canvas on window resize
-window.addEventListener("resize", () => {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-  snowflakes.length = 0; // Clear current snowflakes
-  for (let i = 0; i < NUMBER_OF_SNOWFLAKES; i++) {
-    snowflakes.push(createSnowflake()); // Recreate snowflakes
-  }
-});
-
-// Start animation
-animate();
 
 // Function to fetch movies from TVmaze API
 async function fetchMovies(query) {
@@ -173,16 +61,20 @@ async function fetchMovies(query) {
     `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_API_KEY}&query=${query}`
   );
   const data = await response.json();
-
-  // Map over the results to include required fields
+  // Get the current year
+  const currentYear = new Date().getFullYear();
+  // Filter out movies released before 1995 or after the current year
+  const filteredResults = data.results.filter((item) => {
+    const releaseYear = new Date(item.release_date).getFullYear();
+    return releaseYear >= 1995 && releaseYear <= currentYear;
+  });
+  // Map over the filtered results to include required fields
   const results = await Promise.all(
-    data.results.map(async (item) => {
-      // Fetch movie details to get the IMDb ID
+    filteredResults.map(async (item) => {
       const detailsResponse = await fetch(
         `https://api.themoviedb.org/3/movie/${item.id}?api_key=${TMDB_API_KEY}`
       );
       const details = await detailsResponse.json();
-
       return {
         imdbId: details.imdb_id,
         name: item.title,
@@ -215,12 +107,9 @@ function displayMovieDropdownResults(results) {
     item.appendChild(text);
     dropdown.appendChild(item);
 
-    // On click, display detailed info in resultsContainer and fetch seasons
     item.addEventListener("click", async () => {
       displayMovieFullResults([movie]); // Display the selected movie
-      // Store selected movie's IMDb ID
-      // Close the dropdown after selecting a movie
-      dropdown.style.display = "none"; // Hide dropdown
+      dropdown.style.display = "none";
     });
   });
 
@@ -297,21 +186,13 @@ async function fetchEpisodes(seasonId) {
 
 // Function to convert IMDb ID to TMDB ID
 async function imdbToTmdb(imdbId) {
-  try {
-    const url = `https://api.themoviedb.org/3/find/${imdbId}?api_key=${TMDB_API_KEY}&external_source=imdb_id`;
+  const url = `https://api.themoviedb.org/3/find/${imdbId}?api_key=${TMDB_API_KEY}&external_source=imdb_id`;
 
-    const response = await fetch(url);
-    const data = await response.json();
+  const response = await fetch(url);
+  const data = await response.json();
 
-    // Check for TV show results
-    if (data && data.tv_results.length > 0) {
-      selectedTmdbId = data.tv_results[0].id; // Get the first TV show's TMDB ID
-      console.log(`TMDB ID for IMDb ID "${imdbId}": ${selectedTmdbId}`);
-    } else {
-      console.log(`No TV show results found for IMDb ID "${imdbId}".`);
-    }
-  } catch (error) {
-    console.error(`Error fetching data: ${error.message}`);
+  if (data?.tv_results?.length > 0) {
+    selectedTmdbId = data.tv_results[0].id;
   }
 }
 
@@ -424,6 +305,7 @@ episodeDropdown.addEventListener("change", () => {
 
 // Function to handle search input
 input.addEventListener("input", async () => {
+  videoPlayer.src = "";
   const searchTerm = input.value.trim();
   const selectedCat = document.getElementById("selection").value;
 
@@ -434,7 +316,7 @@ input.addEventListener("input", async () => {
     const fetchedMovies = await fetchMovies(searchTerm);
     displayMovieDropdownResults(fetchedMovies);
   } else {
-    dropdown.style.display = "none"; // Hide dropdown if input is empty
+    dropdown.style.display = "none";
   }
 });
 
@@ -466,3 +348,6 @@ seasonContainer.style.display = "none";
 episodeContainer.style.display = "none";
 videoContainer.style.display = "none"; // Hide video container initially
 searchBox.style.display = "none";
+
+// START
+extractAndAddToClassList();
