@@ -322,6 +322,33 @@ select {
   color: #fff;
 }
 
+.ann {
+  color: yellow;
+  border: #ffee00 1px solid;
+  width: 60%;
+  margin: 15px auto;
+  border-radius: 25px;
+  font-family: "TheGoodMonolith", san-serif;
+  margin-bottom: 2%;
+}
+
+.ann h1 {
+  font-size: 30px;
+}
+
+.sentence {
+  text-align: left;
+  margin-left: 7%;
+  margin-right: 5%;
+  font-size: 25px;
+}
+
+#donate {
+  width: 25%;
+  margin: 0 auto;
+  margin-top: 10px;
+}
+
 /* Media Queries for Mobile */
 @media screen and (max-width: 768px) {
   header {
@@ -449,5 +476,26 @@ select {
     margin: 0 auto;
     padding-bottom: 0;
     margin-bottom: 20px;
+  }
+
+  .ann {
+    width: 70%;
+    margin: 15px auto;
+  }
+
+  .ann h1 {
+    font-size: 20px;
+  }
+
+  .sentence {
+    margin-left: 8%;
+    margin-right: 5%;
+    font-size: 15px;
+  }
+
+  #donate {
+    width: 60%;
+    margin: 0 auto;
+    margin-top: 10px;
   }
 }
