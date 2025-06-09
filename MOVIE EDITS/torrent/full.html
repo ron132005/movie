@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="icon" type="image/x-icon" href="/images/logos/logo.ico" />
+    <link rel="stylesheet" href="https://cdn.pride.codes/css/bar_helpers.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movie Details</title>
+    <link rel="stylesheet" href="full.css" />
+  </head>
+  <body>
+    <div class="pride-strip"></div>
+    <header>
+      <div class="header-container">
+        <div class="logowgetroned">
+          <a href="https://getroned.site/torrent/index.html">
+            <img src="/images/logos/logo.ico" alt="Logo" />
+          </a>
+          <h1>getRONed-yts</h1>
+        </div>
+        <nav class="navigation">
+          <a href="/">STREAM</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="movie-container">
+      <div class="poster">
+        <img id="moviePoster" src="" alt="Movie Poster" />
+      </div>
+      <div class="details">
+        <h1 id="movieTitle">Loading</h1>
+        <p id="movieYearGenre"></p>
+        <div class="available">Available in: <span></span></div>
+        <div class="downloadButtons"></div>
+        <div class="ratings">
+          <p><strong>⭐ IMDB:</strong> <span id="movieRating">5.3/10</span></p>
+        </div>
+        <div class="tags">
+          <span>GENRES</span>
+        </div>
+      </div>
+    </main>
+    <div id="trailerContainer"></div>
+
+    <div class="movie-info">
+      <div class="plot-summary">
+        <h2>Plot summary</h2>
+        <p id="movieDescription">Loading description...</p>
+        <p>
+          <em>Uploaded by: <strong>RON MAR</strong></em>
+        </p>
+        <p><em>June 06, 2025 at 03:24 AM</em></p>
+      </div>
+      <div class="movie-meta">
+        <p><strong>Top cast</strong></p>
+        <p id="movieCast">Loading...</p>
+      </div>
+    </div>
+    <div class="pride-strip"></div>
+
+    <script src="full.js"></script>
+  </body>
+</html>

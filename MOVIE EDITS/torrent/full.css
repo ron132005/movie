@@ -1,0 +1,252 @@
+@font-face {
+  font-family: "TheGoodMonolith";
+  src: url("/fonts/TheGoodMonolith.woff") format("woff");
+  font-display: block; /* waits until the font is ready before showing text */
+}
+
+body {
+  background: radial-gradient(circle, #112131, #071019);
+  color: white;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  font-family: "TheGoodMonolith", sans-serif;
+  background-color: rgba(15, 31, 47, 0.5);
+  border-bottom: 1px solid #152c42;
+  backdrop-filter: blur(8px);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  height: 5rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.logowgetroned {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logowgetroned img {
+  height: 40px;
+  width: auto;
+}
+
+.logowgetroned h1 {
+  color: #ffffff;
+  font-size: 2.6rem;
+  margin: 0;
+}
+
+.navigation a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 1.3rem;
+  padding: 10px 15px;
+  transition: background 0.3s;
+}
+
+.navigation a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+.movie-container {
+  display: grid;
+  grid-template-columns: 300px 1fr 250px;
+  gap: 40px;
+  padding: 40px;
+  padding-top: 110px;
+}
+
+.poster img {
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #000;
+}
+
+.details {
+  max-width: 600px;
+}
+
+.details h1 {
+  font-size: 32px;
+}
+
+.details .available {
+  margin: 10px 0;
+}
+
+.details button {
+  background-color: #33cc33;
+  border: none;
+  padding: 10px 20px;
+  color: #000;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.details .ratings {
+  margin: 15px 0;
+}
+
+.tags span {
+  background-color: #333;
+  padding: 5px 10px;
+  border-radius: 15px;
+  margin-right: 5px;
+  font-size: 12px;
+}
+
+.movie-info {
+  display: flex;
+  gap: 50px;
+  padding: 40px;
+  background-color: #1a1a1a00;
+  font-family: Arial, sans-serif;
+}
+
+.plot-summary {
+  max-width: 60%;
+}
+
+.plot-summary h2 {
+  color: #ffffff;
+}
+
+.movie-meta {
+  text-align: left;
+}
+
+#movieDescription {
+  font-family: "TheGoodMonolith", san-serif;
+}
+
+#movieCast {
+  font-family: "TheGoodMonolith", san-serif;
+}
+
+.downloadButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.downloadButtons button {
+  background-color: #00b894;
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+.downloadButtons button:hover {
+  background-color: #019875;
+}
+
+@media screen and (max-width: 768px) {
+  header {
+    height: 60px;
+    font-size: 0.8em;
+  }
+
+  .header-container {
+    height: 60px; /* Match header height */
+    align-items: center; /* Center all vertically */
+  }
+
+  .logowgetroned h1 {
+    font-size: 1.2rem;
+    line-height: normal;
+  }
+
+  .navigation a {
+    font-size: 0.9rem;
+    line-height: normal;
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+
+  .logowgetroned img {
+    height: 32px; /* Slightly smaller logo for mobile */
+  }
+  .movie-container {
+    grid-template-columns: 1fr;
+    padding: 20px;
+    padding-top: 80px;
+  }
+
+  .poster img {
+    width: 80%; /* Make poster smaller on mobile */
+    margin: 0 auto;
+    display: block;
+  }
+
+  .details h1 {
+    font-size: 24px;
+  }
+
+  .details button {
+    padding: 8px 16px;
+    font-size: 0.9em;
+  }
+
+  .tags span {
+    font-size: 11px;
+    margin-bottom: 5px;
+    display: inline-block;
+  }
+
+  .similar-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .movie-info {
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .plot-summary {
+    max-width: 100%;
+  }
+
+  #trailerContainer {
+    display: none;
+  }
+
+  #trailerContainer.active {
+    display: flex;
+    margin: 2rem auto;
+    width: 100%;
+    max-width: 640px;
+    aspect-ratio: 16 / 9;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #trailerContainer iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 8px;
+  }
+}
