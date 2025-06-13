@@ -61,7 +61,7 @@ fetch(
         const btn = document.createElement("button");
         btn.textContent = `Download ${torrent.quality}`;
         btn.onclick = () => {
-          const serverDownloadUrl = `https://servers-0eqt.onrender.com/download?url=${encodeURIComponent(
+          const serverDownloadUrl = `https://servers-fj5o.onrender.com/download?url=${encodeURIComponent(
             torrent.url
           )}&title=${encodeURIComponent(movie.title)}&year=${
             movie.year
