@@ -161,6 +161,33 @@ header {
   background-color: #019875;
 }
 
+#trailerContainer {
+  width: 850px;
+  margin: 2rem auto;
+  aspect-ratio: 16 / 9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid rgba(255, 255, 255, 0.2); /* subtle border */
+  border-radius: 16px; /* smooth rounded corners */
+  overflow: hidden; /* clip the video inside the rounded border */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3); /* optional: soft shadow */
+  background-color: #000; /* background behind video while loading */
+}
+
+#trailerContainer iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 8px;
+}
+
+#trailerContainer .plyr {
+  --plyr-color-main: #1ac266;
+  --plyr-badge-background: #0b2f68;
+  --plyr-control-icon-size: 18px;
+}
+
 @media screen and (max-width: 768px) {
   header {
     height: 60px;
@@ -230,23 +257,12 @@ header {
   }
 
   #trailerContainer {
-    display: none;
-  }
-
-  #trailerContainer.active {
-    display: flex;
-    margin: 2rem auto;
-    width: 100%;
-    max-width: 640px;
-    aspect-ratio: 16 / 9;
-    justify-content: center;
-    align-items: center;
-  }
-
-  #trailerContainer iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-    border-radius: 8px;
+    width: 90vw; /* 90% of screen width */
+    aspect-ratio: 16 / 9; /* maintain landscape ratio */
+    margin: 5vh auto;
+    background-color: #000;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
   }
 }

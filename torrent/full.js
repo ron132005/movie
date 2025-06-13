@@ -23,11 +23,9 @@ fetch(
     const tempImg = new Image();
     tempImg.src = movie.large_cover_image; // starts fetching immediately
     tempImg.onload = () => {
-      // only once fully loaded, swap it in
       posterEl.src = tempImg.src;
     };
     tempImg.onerror = () => {
-      // fallback or remove if broken
       posterEl.remove();
     };
 
@@ -47,14 +45,12 @@ fetch(
       return (order[a.quality] || 99) - (order[b.quality] || 99);
     });
 
-    // Update quality availability text
     const availableBox = document.querySelector(".available");
     const qualities = [...new Set(sortedTorrents.map((t) => t.quality))];
     availableBox.innerHTML = `Available in: <span>${qualities.join(
       ", "
     )}</span>`;
 
-    // Create buttons for each unique quality
     const downloadContainer = document.querySelector(".downloadButtons");
     downloadContainer.innerHTML = "";
     const addedQualities = new Set();
@@ -62,27 +58,23 @@ fetch(
     sortedTorrents.forEach((torrent) => {
       if (!addedQualities.has(torrent.quality)) {
         addedQualities.add(torrent.quality);
-
         const btn = document.createElement("button");
         btn.textContent = `Download ${torrent.quality}`;
         btn.onclick = () => {
-          const serverDownloadUrl = `https://servers-fj5o.onrender.com/download?url=${encodeURIComponent(
+          const serverDownloadUrl = `https://servers-0eqt.onrender.com/download?url=${encodeURIComponent(
             torrent.url
           )}&title=${encodeURIComponent(movie.title)}&year=${
             movie.year
           }&quality=${encodeURIComponent(torrent.quality)}`;
-
           window.location.href = serverDownloadUrl;
         };
         downloadContainer.appendChild(btn);
       }
     });
 
-    // Plot summary
     document.getElementById("movieDescription").textContent =
       movie.description_full || "No description available.";
 
-    // Top cast (up to 5 actors)
     const topCast = movie.cast
       ?.filter((person) => person.role !== "Director")
       .slice(0, 5);
@@ -98,35 +90,52 @@ fetch(
 //Youtube Trailer
 function embedTrailer(trailerId) {
   const container = document.getElementById("trailerContainer");
-  if (!trailerId || typeof trailerId !== "string") {
-    console.warn("Invalid or missing trailer ID.");
-    if (container) container.style.display = "none"; // Hide container
-    return;
-  }
-
   if (!container) {
-    console.error('Container element with ID "trailerContainer" not found.');
+    console.error("No #trailerContainer");
+    return;
+  }
+  if (!trailerId || typeof trailerId !== "string") {
+    console.warn("Invalid trailer ID");
+    container.style.display = "none";
     return;
   }
 
-  container.style.display = "block"; // Show container
-
-  // Clear existing content
-  container.innerHTML = "";
-
-  // Embed the trailer
+  container.style.display = "block";
   container.innerHTML = `
-    <iframe
-      width="100%"
-      height="100%"
-      src="https://www.youtube.com/embed/${trailerId}"
-      frameborder="0"
-      allowfullscreen
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      style="aspect-ratio: 16 / 9; border-radius: 8px;"
-    ></iframe>
+    <div
+      id="player"
+      class="plyr__video-embed"
+      data-plyr-provider="youtube"
+      data-plyr-embed-id="${trailerId}"
+      data-plyr-embed-params="autoplay=0&cc_load_policy=1&cc_lang_pref=en"
+    ></div>
   `;
+
+  new Plyr("#player", {
+    autoplay: false,
+    muted: false,
+    controls: [
+      "play",
+      "progress",
+      "current-time",
+      "mute",
+      "volume",
+      "captions",
+      "settings",
+      "fullscreen",
+    ],
+    settings: ["captions", "quality", "speed"],
+    captions: {
+      active: false,
+      language: "en",
+      update: true,
+    },
+  });
 }
-if (trailerId !== " " && trailerId !== "undefined") {
-  embedTrailer(trailerId);
-}
+
+// Delay embedding trailer until full window load to prevent layout shifts
+window.addEventListener("load", () => {
+  if (trailerId !== " " && trailerId !== "undefined") {
+    embedTrailer(trailerId);
+  }
+});
