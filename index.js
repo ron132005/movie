@@ -150,7 +150,7 @@ function displayMovieFullResults(results) {
     resultsContainer.appendChild(card);
     selectedMovieId = movie.imdbId;
 
-    const embedUrl = `https://vidjoy.pro/embed/movie/${selectedMovieId}?adFree=true`;
+    const embedUrl = `https://vidlink.pro/movie/${selectedMovieId}`;
 
     // Display the embed link in the iframe
     videoPlayer.src = embedUrl;
@@ -308,7 +308,7 @@ episodeDropdown.addEventListener("change", () => {
       seasonDropdown.options[seasonDropdown.selectedIndex].text.split(" ")[1]; // Get season number
 
     // Construct the embed URL
-    const embedUrl = `https://vidjoy.pro/embed/tv/${selectedTmdbId}/${seasonNumber}/${episodeNumber}?adFree=true`;
+    const embedUrl = `https://vidlink.pro/tv/${selectedTmdbId}/${seasonNumber}/${episodeNumber}`;
 
     // Display the embed link in the iframe
     videoPlayer.src = embedUrl;
