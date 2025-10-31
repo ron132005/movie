@@ -1,3 +1,28 @@
+#I {
+	opacity: 1;
+	animation: flickerI 2s linear reverse infinite;
+}
+#I::after {
+	content: "";
+	width: 150%;
+	-webkit-box-shadow: -35px 0px 60px 8px rgba(255, 255, 255, 1);
+	-moz-box-shadow: -35px 0px 60px 8px rgba(255, 255, 255, 1);
+	box-shadow: -35px 0px 60px 8px rgba(255, 255, 255, 1);
+}
+#L,
+#G {
+	animation: flickerLG 2s linear reverse infinite;
+	position: relative;
+}
+#L::after,
+#L::before {
+	content: " ";
+	width: 100px;
+	height: 100px;
+	background: var(--white);
+	position: absolute;
+	top: -50%;
+	left: 100%;
 	border-radius: 100%;
 	opacity: 0.05;
 	filter: blur(10px);
@@ -11,11 +36,11 @@
 	filter: blur(10px);
 }
 #H {
-	animation: flickerH 2s linear reverse infinite
+	animation: flickerH 2s linear reverse infinite;
 }
 
 #T {
-	animation: flickerH 2s linear reverse infinite
+	animation: flickerH 2s linear reverse infinite;
 }
 
 @keyframes flickerI {
@@ -182,16 +207,16 @@
 		opacity: 0.1;
 	}
 	60% {
-		opacity: 0.;
+		opacity: 0;
 	}
 	70% {
 		opacity: 0.1;
 	}
 	80% {
-		opacity: 0.;
+		opacity: 0;
 	}
 	90% {
-		opacity: 0.0;
+		opacity: 0;
 	}
 	100% {
 		opacity: 0.1;
