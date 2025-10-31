@@ -19,7 +19,7 @@ let selectedTmdbId;
 
 async function extractAndAddToClassList() {
   const proxyUrl = "https://api.allorigins.win/get?url=";
-  const targetUrl = "https://announcements-71pg.onrender.com";
+  const targetUrl = "https://announcementsgetroned.netlify.app/";
   const response = await fetch(proxyUrl + encodeURIComponent(targetUrl));
   const htmlText = (await response.json()).contents;
   const lines = (htmlText.match(/\[ann\]([\s\S]*?)\[ann\]/)?.[1] || "")
