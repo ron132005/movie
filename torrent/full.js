@@ -184,10 +184,10 @@ function embedTrailer(trailerId) {
     muted: false,
     controls: [
       "play",
-      "progress",
       "current-time",
       "mute",
       "volume",
+      "progress",
       "captions",
       "settings",
       "fullscreen",
