@@ -180,25 +180,24 @@ function embedTrailer(trailerId) {
   `;
 
   new Plyr("#player", {
-    autoplay: false,
-    muted: false,
-    controls: [
-      "play",
-      "current-time",
-      "mute",
-      "volume",
-      "progress",
-      "captions",
-      "settings",
-      "fullscreen",
-    ],
-    settings: ["captions", "quality", "speed"],
-    captions: {
-      active: false,
-      language: "en",
-      update: true,
-    },
-  });
+  autoplay: false,
+  muted: false,
+  controls: [
+    "play",
+    "current-time",
+    "progress",
+    "captions",
+    "settings",
+    "fullscreen",
+  ],
+  settings: ["captions", "quality", "speed"],
+  captions: {
+    active: false,
+    language: "en",
+    update: true,
+  },
+  volume: 1, // sets volume to 100%
+});
 }
 
 window.addEventListener("load", () => {
