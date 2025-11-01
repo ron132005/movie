@@ -1,0 +1,11 @@
+[[redirects]]
+  from = "https://getroned.site/*"
+  to = "https://www.getroned.online/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.getroned.site/*"
+  to = "https://www.getroned.online/:splat"
+  status = 301
+  force = true
