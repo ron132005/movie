@@ -32,4 +32,4 @@ const batInterval = setInterval(createBat, 500);
 // stop spawning after 8 seconds
 setTimeout(() => {
   clearInterval(batInterval);
-}, 8000);
+}, 15000);
