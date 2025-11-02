@@ -405,6 +405,11 @@ select {
   margin-top: 10px;
 }
 
+#popads-banner {
+  margin-top: 50px;
+}
+
+
 /* Media Queries for Mobile */
 @media screen and (max-width: 768px) {
   header {
