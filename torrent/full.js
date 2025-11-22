@@ -64,8 +64,9 @@ async function downloadAndRename(url, filename) {
   }
 }
 
+// Changed to lt
 // Fetch movie data from YTS and build UI (you had this already; mostly unchanged)
-fetch(`https://yts.mx/api/v2/movie_details.json?movie_id=${movieId}&with_cast=true`)
+fetch(`https://yts.lt/api/v2/movie_details.json?movie_id=${movieId}&with_cast=true`)
   .then((response) => response.json())
   .then((data) => {
     const movie = data.data.movie;
