@@ -111,9 +111,10 @@ input.addEventListener("keydown", async (event) => {
 });
 
 // Fetch movies from YTS
+// Change from  .mx to  .lt
 async function fetchMovies(query) {
   const resp = await fetch(
-    `https://yts.mx/api/v2/list_movies.json?query_term=${encodeURIComponent(
+    `https://yts.lt/api/v2/list_movies.json?query_term=${encodeURIComponent(
       query
     )}`
   );
