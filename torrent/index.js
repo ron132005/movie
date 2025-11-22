@@ -27,12 +27,12 @@ document.addEventListener("DOMContentLoaded", () => {
     updateCounter();
   });
 });
-
+// Change to lt
 // Function to fetch movies from YTS API
 async function fetchMovies(query) {
   try {
     const response = await fetch(
-      `https://yts.mx/api/v2/list_movies.json?query_term=${query}`
+      `https://yts.lt/api/v2/list_movies.json?query_term=${query}`
     );
     const data = await response.json();
 
