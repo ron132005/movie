@@ -1,4 +1,5 @@
-// CONFIG
+export function startSnowEffect() {
+  // ---- your entire snow code here ----// CONFIG
 const NUMBER_OF_SNOWFLAKES = 5;
 const MAX_SNOWFLAKE_SIZE = 5;
 const MAX_SNOWFLAKE_SPEED = 2;
@@ -84,3 +85,5 @@ window.addEventListener("resize", () => {
 
 // Start animation
 requestAnimationFrame(animate);
+
+}
