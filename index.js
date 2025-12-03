@@ -12,8 +12,6 @@ const videoPlayer = document.getElementById("videoPlayer");
 const sentence = document.getElementById("sentence");
 const announcement = document.getElementById("ann");
 
-import { startSnowEffect } from "../functions/snow.js";
-startSnowEffect(); // runs the 8-sec animation
 
 // VARIABLES
 const TMDB_API_KEY = "a5f1a167ac8db6e31a8fb9934919703c";
