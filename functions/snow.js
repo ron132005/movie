@@ -1,79 +1,86 @@
-// Function to snow
+// CONFIG
 const NUMBER_OF_SNOWFLAKES = 5;
 const MAX_SNOWFLAKE_SIZE = 5;
 const MAX_SNOWFLAKE_SPEED = 2;
 const SNOWFLAKE_COLOUR = "#ddd";
-const snowflakes = [];
 
-// Create canvas and append to body
+let snowflakes = [];
+let running = true;
+let startTime = null;
+
+// Canvas
 const canvas = document.createElement("canvas");
-canvas.style.position = "fixed"; // Ensure it stays in place
-canvas.style.pointerEvents = "none"; // Avoid interfering with clicks
+canvas.style.position = "fixed";
+canvas.style.pointerEvents = "none";
 canvas.style.top = "0";
-canvas.style.left = "0"; // Align to the left
-canvas.width = window.innerWidth; // Match full width
-canvas.height = window.innerHeight; // Match full height
+canvas.style.left = "0";
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 document.body.appendChild(canvas);
 
 const ctx = canvas.getContext("2d");
 
-// Function to create a snowflake
-const createSnowflake = () => ({
-  x: Math.random() * canvas.width, // Random x position within the canvas width
-  y: Math.random() * canvas.height, // Random y position
-  radius: Math.floor(Math.random() * MAX_SNOWFLAKE_SIZE) + 1, // Random size
-  color: SNOWFLAKE_COLOUR,
-  speed: Math.random() * MAX_SNOWFLAKE_SPEED + 1, // Random fall speed
-  sway: Math.random() - 0.5, // Side-to-side sway
-});
+// Create one snowflake
+function createSnowflake() {
+  return {
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    r: Math.random() * MAX_SNOWFLAKE_SIZE + 1,
+    s: Math.random() * MAX_SNOWFLAKE_SPEED + 1,
+    sway: Math.random() - 0.5
+  };
+}
 
-// Function to draw a snowflake
-const drawSnowflake = (snowflake) => {
-  ctx.beginPath();
-  ctx.arc(snowflake.x, snowflake.y, snowflake.radius, 0, Math.PI * 2);
-  ctx.fillStyle = snowflake.color;
-  ctx.fill();
-  ctx.closePath();
-};
-
-// Update snowflake position
-const updateSnowflake = (snowflake) => {
-  snowflake.y += snowflake.speed; // Move down
-  snowflake.x += snowflake.sway; // Sway side-to-side
-  if (
-    snowflake.y > canvas.height ||
-    snowflake.x < 0 ||
-    snowflake.x > canvas.width
-  ) {
-    Object.assign(snowflake, createSnowflake()); // Recycle snowflake
-    snowflake.y = 0; // Start at the top
-  }
-};
-
-// Animation function
-const animate = () => {
-  ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas
-  snowflakes.forEach((snowflake) => {
-    updateSnowflake(snowflake);
-    drawSnowflake(snowflake);
-  });
-  requestAnimationFrame(animate); // Recursive animation call
-};
-
-// Initialize snowflakes
+// Init pool
 for (let i = 0; i < NUMBER_OF_SNOWFLAKES; i++) {
   snowflakes.push(createSnowflake());
 }
 
-// Adjust canvas on window resize
+// Animation
+function animate(timestamp) {
+  if (!startTime) startTime = timestamp;
+
+  // Stop after 8 seconds
+  if (timestamp - startTime >= 8000) {
+    running = false;
+  }
+
+  if (!running) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    return; // completely stop animation
+  }
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  for (let f of snowflakes) {
+    // update
+    f.y += f.s;
+    f.x += f.sway;
+
+    if (f.y > canvas.height || f.x < 0 || f.x > canvas.width) {
+      Object.assign(f, createSnowflake());
+      f.y = 0;
+    }
+
+    // draw
+    ctx.beginPath();
+    ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
+    ctx.fillStyle = SNOWFLAKE_COLOUR;
+    ctx.fill();
+  }
+
+  requestAnimationFrame(animate);
+}
+
+// Resize handling
 window.addEventListener("resize", () => {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
-  snowflakes.length = 0; // Clear current snowflakes
+  snowflakes = [];
   for (let i = 0; i < NUMBER_OF_SNOWFLAKES; i++) {
-    snowflakes.push(createSnowflake()); // Recreate snowflakes
+    snowflakes.push(createSnowflake());
   }
 });
 
 // Start animation
-animate();
+requestAnimationFrame(animate);
