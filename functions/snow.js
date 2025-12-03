@@ -39,14 +39,9 @@ for (let i = 0; i < NUMBER_OF_SNOWFLAKES; i++) {
 function animate(timestamp) {
   if (!startTime) startTime = timestamp;
 
-  // Stop after 8 seconds
+  // After 8 seconds, stop creating new snowflakes
   if (timestamp - startTime >= 8000) {
     running = false;
-  }
-
-  if (!running) {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    return; // completely stop animation
   }
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -56,7 +51,16 @@ function animate(timestamp) {
     f.y += f.s;
     f.x += f.sway;
 
+    // If off-screen
     if (f.y > canvas.height || f.x < 0 || f.x > canvas.width) {
+
+      if (!running) {
+        // Do not respawn — remove it
+        f.y = Infinity;
+        continue;
+      }
+
+      // Respawn normally while still within time
       Object.assign(f, createSnowflake());
       f.y = 0;
     }
