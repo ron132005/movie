@@ -39,8 +39,8 @@ for (let i = 0; i < NUMBER_OF_SNOWFLAKES; i++) {
 function animate(timestamp) {
   if (!startTime) startTime = timestamp;
 
-  // After 8 seconds, stop creating new snowflakes
-  if (timestamp - startTime >= 8000) {
+  // After 5 seconds, stop creating new snowflakes
+  if (timestamp - startTime >= 5000) {
     running = false;
   }
 
