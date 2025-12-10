@@ -21,18 +21,59 @@ let selectedTmdbId;
 async function extractAndAddToClassList() {
   const proxyUrl = "https://api.allorigins.win/get?url=";
   const targetUrl = "https://announcementsgetroned.netlify.app/";
-  const response = await fetch(proxyUrl + encodeURIComponent(targetUrl));
-  const htmlText = (await response.json()).contents;
-  const lines = (htmlText.match(/\[ann\]([\s\S]*?)\[ann\]/)?.[1] || "")
-    .split("|")
-    .map((line) => line.trim())
-    .filter(Boolean);
-  lines.forEach((line) => {
-    const p = document.createElement("p");
-    p.textContent = line;
-    sentence.appendChild(p);
-  });
-  announcement.style.display = "block";
+
+  try {
+    const response = await fetch(proxyUrl + encodeURIComponent(targetUrl));
+
+    if (!response.ok) {
+      throw new Error(`Network error: ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    if (!data?.contents) {
+      throw new Error("No content returned from proxy.");
+    }
+
+    // Extract content between [ann] ... [ann]
+    const match = data.contents.match(/\[ann\]([\s\S]*?)\[ann\]/);
+
+    if (!match || !match[1]) {
+      throw new Error("No announcement block found.");
+    }
+
+    const textBlock = match[1];
+
+    // Split by "|" and clean each line
+    const lines = textBlock
+      .split("|")
+      .map(line => line.trim())
+      .filter(Boolean);
+
+    if (lines.length === 0) {
+      throw new Error("Announcement block found, but contains no valid text.");
+    }
+
+    // Clear previous announcements to avoid duplicates
+    sentence.innerHTML = "";
+
+    // Add each announcement as a paragraph
+    lines.forEach(line => {
+      const p = document.createElement("p");
+      p.textContent = line;
+      sentence.appendChild(p);
+    });
+
+    announcement.style.display = "block";
+    console.log("Announcements successfully loaded.");
+
+  } catch (err) {
+    console.error("Announcement Error:", err.message);
+
+    // Optional: display fallback message
+    sentence.innerHTML = "<p>No announcements found.</p>";
+    announcement.style.display = "block";
+  }
 }
 
 //Function to show search box
