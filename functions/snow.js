@@ -1,4 +1,4 @@
-const NUMBER_OF_SNOWFLAKES = 6;
+const NUMBER_OF_SNOWFLAKES = 7;
 const MAX_SNOWFLAKE_SIZE = 5;
 const MAX_SNOWFLAKE_SPEED = 2;
 const SNOWFLAKE_COLOUR = "#ddd";
@@ -39,8 +39,8 @@ for (let i = 0; i < NUMBER_OF_SNOWFLAKES; i++) {
 function animate(timestamp) {
   if (!startTime) startTime = timestamp;
 
-  // After 5 seconds, stop creating new snowflakes
-  if (timestamp - startTime >= 5000) {
+  // After 6 seconds, stop creating new snowflakes
+  if (timestamp - startTime >= 6000) {
     running = false;
   }
 
