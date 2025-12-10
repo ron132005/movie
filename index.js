@@ -151,7 +151,8 @@ function displayMovieFullResults(results) {
     resultsContainer.appendChild(card);
     selectedMovieId = movie.imdbId;
 
-    const embedUrl = `https://vidlink.pro/movie/${selectedMovieId}`;
+    //const embedUrl = `https://vidlink.pro/movie/${selectedMovieId}`;
+    const embedUrl = `https://vidsrc.cc/v2/embed/movie/${selectedMovieId}?autoPlay=false`;
 
     // Display the embed link in the iframe
     videoPlayer.src = embedUrl;
