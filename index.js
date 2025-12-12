@@ -192,8 +192,8 @@ function displayMovieFullResults(results) {
     resultsContainer.appendChild(card);
     selectedMovieId = movie.imdbId;
 
-    //const embedUrl = `https://vidlink.pro/movie/${selectedMovieId}`;
-    const embedUrl = `https://vidsrc.cc/v2/embed/movie/${selectedMovieId}?autoPlay=false`;
+    const embedUrl = `https://vidlink.pro/movie/${selectedMovieId}`;
+    //const embedUrl = `https://vidsrc.cc/v2/embed/movie/${selectedMovieId}?autoPlay=false`;
 
     // Display the embed link in the iframe
     videoPlayer.src = embedUrl;
@@ -351,8 +351,8 @@ episodeDropdown.addEventListener("change", () => {
       seasonDropdown.options[seasonDropdown.selectedIndex].text.split(" ")[1]; // Get season number
 
     // Construct the embed URL
-    // const embedUrl = `https://vidlink.pro/tv/${selectedTmdbId}/${seasonNumber}/${episodeNumber}`;
-    const embedUrl = `https://vidsrc.cc/v2/embed/tv/${selectedTmdbId}/${seasonNumber}/${episodeNumber}?autoPlay=false`;
+    const embedUrl = `https://vidlink.pro/tv/${selectedTmdbId}/${seasonNumber}/${episodeNumber}`;
+    //const embedUrl = `https://vidsrc.cc/v2/embed/tv/${selectedTmdbId}/${seasonNumber}/${episodeNumber}?autoPlay=false`;
 
     // Display the embed link in the iframe
     videoPlayer.src = embedUrl;
