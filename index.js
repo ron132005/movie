@@ -69,10 +69,6 @@ async function extractAndAddToClassList() {
 
   } catch (err) {
     console.error("Announcement Error:", err.message);
-
-    // Optional: display fallback message
-    sentence.innerHTML = "<p>No announcements found.</p>";
-    announcement.style.display = "block";
   }
 }
 
